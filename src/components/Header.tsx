@@ -2,8 +2,9 @@ import { getTranslations } from "next-intl/server";
 import { business } from "@content/business";
 import type { Locale } from "@content/types";
 import { Link } from "@/i18n/navigation";
-import { PhoneIcon, TreeIcon } from "./icons";
+import { PhoneIcon } from "./icons";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { Logo } from "./Logo";
 import { MobileNav } from "./MobileNav";
 import { mainNav } from "./nav";
 
@@ -17,12 +18,9 @@ export async function Header({ locale }: { locale: Locale }) {
       >
         {t("skipToContent")}
       </a>
-      <div className="container-page flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2 text-pine-900">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-pine-800 text-wood-300">
-            <TreeIcon width={22} height={22} />
-          </span>
-          <span className="whitespace-nowrap font-display text-2xl font-semibold leading-none">{business.name[locale]}</span>
+      <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
+        <Link href="/" className="shrink-0">
+          <Logo height={64} alt={business.name[locale]} priority className="h-12 w-auto lg:h-16" />
         </Link>
 
         <nav aria-label={t("home")} className="hidden lg:block">

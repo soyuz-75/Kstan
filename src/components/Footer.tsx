@@ -4,6 +4,7 @@ import type { Locale } from "@content/types";
 import { Link } from "@/i18n/navigation";
 import { Hours } from "./Hours";
 import { InstagramIcon, PhoneIcon, PinIcon } from "./icons";
+import { LogoBadge } from "./Logo";
 import { mainNav } from "./nav";
 
 export async function Footer({ locale }: { locale: Locale }) {
@@ -16,8 +17,8 @@ export async function Footer({ locale }: { locale: Locale }) {
     <footer className="bg-pine-900 pb-28 pt-14 text-cream-100 lg:pb-10">
       <div className="container-page grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-3xl text-cream-50">{business.name[locale]}</p>
-          <p className="mt-3 max-w-xs text-sm text-cream-200">{t("about")}</p>
+          <LogoBadge size={112} alt={business.name[locale]} className="h-28 w-28 ring-4 ring-pine-700" />
+          <p className="mt-4 max-w-xs text-sm text-cream-200">{t("about")}</p>
           <a
             href={business.social.instagram}
             className="mt-4 inline-flex items-center gap-2 text-sm text-wood-300 hover:text-wood-100"

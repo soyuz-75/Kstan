@@ -14,7 +14,8 @@
     "db:migrate": "tsx scripts/migrate.ts",
     "db:seed": "tsx scripts/seed.ts",
     "images:placeholders": "tsx scripts/make-placeholders.ts",
-    "images:import": "tsx scripts/import-legacy-images.ts"
+    "images:import": "tsx scripts/import-legacy-images.ts",
+    "brand": "tsx scripts/brand-assets.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.3",

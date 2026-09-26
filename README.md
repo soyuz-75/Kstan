@@ -31,6 +31,7 @@ pnpm dev                              # http://localhost:3000
 | `pnpm db:generate --name <x>` | New migration after editing `src/lib/db/schema.ts` |
 | `pnpm images:import` | Re-download the real photos from k-stan.vn.ua and hotels3d.com into `public/images/` |
 | `pnpm images:placeholders` | Regenerate illustrated stand-ins for photos that don't exist yet |
+| `pnpm brand` | Rebuild the logo SVG, round badge, favicon and app icons from `scripts/brand/` (the SVG trace needs `potrace`) |
 
 For e2e with a preinstalled Chromium, set `CHROMIUM_PATH=/path/to/chrome`.
 
@@ -94,6 +95,17 @@ These came from the old site, the live ChoiceQR menu and hotels3d.com. Please ch
 - 4 small (400×200) room views from hotels3d.com (standard, VIP №18, VIP №22) and the tavern exterior.
 
 **Still needed:** the sauna, food, the small VIP houses, and full-resolution room interiors. These currently show illustrated placeholders (`placeholder: true`). The room previews are low-res because the full 360° panoramas are hosted on `3d-tours.com.ua`, so ask the owner or their photographer for the originals. Drop a WebP of at least 1600 px with the same file name into `public/images/`, update the width and height, and set `placeholder: false`.
+
+## Logo
+
+`scripts/brand/` holds both real sources: the old site's transparent logo (`Logo_KozStan_2017.png`, 200×153) and the round parchment badge from Instagram. `pnpm brand` builds everything from them:
+
+- `public/brand/logo.svg`: a vector trace of the fortress-and-ribbon logo, used in the header.
+- `public/brand/logo-badge.png`: the round badge, used in the footer and the social preview image.
+- `public/logo.png`: the logo Google uses (JSON-LD).
+- `src/app/icon.png` and `src/app/apple-icon.png`: the browser tab and phone home-screen icons.
+
+If the owner has the original vector logo (SVG, AI, EPS or PDF from the designer), save it as `public/brand/logo.svg` and run `pnpm brand --no-trace`.
 
 ## Off-site SEO checklist for the owner
 

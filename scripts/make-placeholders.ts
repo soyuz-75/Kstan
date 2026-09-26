@@ -1,7 +1,7 @@
 /**
  * Generates illustrated placeholder photos (WebP) for every image in
- * content/images.ts that is still marked `placeholder: true`, plus the site
- * icons. Real photos simply overwrite the same files later.
+ * content/images.ts that is still marked `placeholder: true`. Real photos
+ * simply overwrite the same files later. (Logo and icons: scripts/brand-assets.ts.)
  *
  *   pnpm images:placeholders            # only missing files
  *   pnpm images:placeholders --force    # regenerate all placeholders
@@ -136,10 +136,6 @@ const scenes: Partial<Record<ImageKey, () => string>> = {
   food: () => interior(101, "food"),
 };
 
-const ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#1F3B2D"/>
-  <path d="M32 9 L20 27 H26 L16 41 H27 V52 H37 V41 H48 L38 27 H44 Z" fill="#E2B26B"/>
-</svg>`;
 
 async function main() {
   mkdirSync(path.join(OUT, "images"), { recursive: true });
@@ -152,12 +148,6 @@ async function main() {
     await sharp(Buffer.from(scene())).resize(image.width, image.height).webp({ quality: 72 }).toFile(file);
     console.log("placeholder", image.src);
   }
-
-  const appDir = path.join(process.cwd(), "src", "app");
-  await sharp(Buffer.from(ICON_SVG)).resize(180, 180).png().toFile(path.join(appDir, "apple-icon.png"));
-  await sharp(Buffer.from(ICON_SVG)).resize(512, 512).png().toFile(path.join(OUT, "logo.png"));
-  await sharp(Buffer.from(ICON_SVG)).resize(32, 32).png().toFile(path.join(appDir, "icon.png"));
-  console.log("icons written");
 }
 
 main().catch((err) => {

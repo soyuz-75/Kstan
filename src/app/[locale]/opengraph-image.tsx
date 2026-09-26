@@ -23,11 +23,12 @@ export function generateStaticParams() {
 export default async function OgImage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: raw } = await params;
   const locale: Locale = raw === "en" ? "en" : "uk";
-  const [display, sans, photo] = await Promise.all([
+  const [display, sans, photo, badge] = await Promise.all([
     readFile(path.join(process.cwd(), "src/app/fonts/CormorantGaramond-SemiBold.ttf")),
     readFile(path.join(process.cwd(), "src/app/fonts/Manrope-Medium.ttf")),
     // Satori can't decode WebP, so hand it a JPEG.
     sharp(path.join(process.cwd(), "public", images.hero.src)).resize(1200, 630, { fit: "cover" }).jpeg({ quality: 80 }).toBuffer(),
+    sharp(path.join(process.cwd(), "public/brand/logo-badge.png")).resize(176, 176).png().toBuffer(),
   ]);
 
   const png = new ImageResponse(
@@ -40,6 +41,13 @@ export default async function OgImage({ params }: { params: Promise<{ locale: st
             inset: 0,
             background: "linear-gradient(to top, rgba(19,38,28,0.95) 0%, rgba(19,38,28,0.55) 45%, rgba(19,38,28,0.1) 100%)",
           }}
+        />
+        <img
+          src={`data:image/png;base64,${badge.toString("base64")}`}
+          width={176}
+          height={176}
+          alt=""
+          style={{ position: "absolute", left: 64, top: 56, borderRadius: 88, border: "6px solid #fdfaf4" }}
         />
         <div style={{ position: "absolute", left: 64, right: 64, bottom: 56, display: "flex", flexDirection: "column", color: "#fdfaf4" }}>
           <div style={{ fontFamily: "Manrope", fontSize: 26, letterSpacing: 4, color: "#e2b26b", textTransform: "uppercase" }}>

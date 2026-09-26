@@ -21,6 +21,7 @@ for (const [path, lang] of pages) {
     expect(res?.status()).toBe(200);
     await expect(page.locator("html")).toHaveAttribute("lang", lang);
     await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page.locator('header img[src="/brand/logo.svg"]')).toBeVisible();
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://k-stan.vn.ua${path}`);
     await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveCount(1);
     const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
