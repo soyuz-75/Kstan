@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { business } from "@content/business";
 import type { Locale } from "@content/types";
+import { images, saunaKeys } from "@content/images";
 import { saunaInfo } from "@content/venues";
+import { Gallery } from "@/components/Gallery";
 import { CheckIcon, ClockIcon, PhoneIcon } from "@/components/icons";
 import { PageHeader } from "@/components/PageHeader";
 import { Photo } from "@/components/Photo";
@@ -22,6 +24,8 @@ export default async function SaunaPage({ params }: PageProps<"/[locale]/sauna-n
   const tn = await getTranslations({ locale, namespace: "nav" });
 
   const features = ["guests", "pool", "rest", "balcony", "tea"] as const;
+  const [main, ...more] = saunaKeys;
+  const thumbs = more.map((k) => ({ ...images[k], alt: images[k].alt[locale] }));
 
   return (
     <>
@@ -32,8 +36,13 @@ export default async function SaunaPage({ params }: PageProps<"/[locale]/sauna-n
         crumbs={[crumb("/", locale, tn("home")), crumb("/sauna-na-drovakh", locale, t("title"))]}
       />
       <section className="container-page grid gap-10 py-12 lg:grid-cols-2">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-cream-200">
-          <Photo id="sauna" locale={locale} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+        <div>
+          <div className="relative aspect-[3/2] overflow-hidden rounded-2xl bg-cream-200">
+            <Photo id={main} locale={locale} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          </div>
+          <div className="mt-3">
+            <Gallery items={thumbs} gridClassName="grid grid-cols-3 gap-3" />
+          </div>
         </div>
         <div>
           <ul className="grid gap-3 sm:grid-cols-2">

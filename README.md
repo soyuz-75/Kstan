@@ -92,9 +92,10 @@ These came from the old site, the live ChoiceQR menu and hotels3d.com. Please ch
 `content/images.ts` is the manifest. The real photos in use are:
 
 - 6 full-HD exteriors from the old homepage, plus the banquet hall and a gazebo scene from inner pages.
+- 4 sauna photos (pool, steam room, pool with ladder, rest room) from the Instagram post instagram.com/p/Bb7CEptFTN3, cropped to remove Instagram's arrows and dots.
 - 4 small (400×200) room views from hotels3d.com (standard, VIP №18, VIP №22) and the tavern exterior.
 
-**Still needed:** the sauna, food, the small VIP houses, and full-resolution room interiors. These currently show illustrated placeholders (`placeholder: true`). The room previews are low-res because the full 360° panoramas are hosted on `3d-tours.com.ua`, so ask the owner or their photographer for the originals. Drop a WebP of at least 1600 px with the same file name into `public/images/`, update the width and height, and set `placeholder: false`.
+**Still needed:** food and the small VIP houses, which show illustrated placeholders (`placeholder: true`), plus full-resolution room interiors. The room previews are low-res because the full 360° panoramas are hosted on `3d-tours.com.ua`, so ask the owner or their photographer for the originals. Drop a WebP of at least 1600 px with the same file name into `public/images/`, update the width and height, and set `placeholder: false`.
 
 ## Logo
 

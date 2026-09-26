@@ -132,7 +132,6 @@ function interior(seed: number, kind: "room" | "house" | "sauna" | "hall" | "res
 
 const scenes: Partial<Record<ImageKey, () => string>> = {
   vipHouseSmall: () => landscape(37, day, { cabins: 2 }),
-  sauna: () => interior(83, "sauna"),
   food: () => interior(101, "food"),
 };
 

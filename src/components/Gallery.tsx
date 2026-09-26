@@ -8,7 +8,16 @@ import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from "./icons";
 export type GalleryItem = { src: string; alt: string; width: number; height: number };
 
 /** Thumbnail grid with an accessible <dialog> lightbox (Esc, arrows, swipe). */
-export function Gallery({ items, variant = "grid" }: { items: GalleryItem[]; variant?: "grid" | "strip" }) {
+export function Gallery({
+  items,
+  variant = "grid",
+  gridClassName,
+}: {
+  items: GalleryItem[];
+  variant?: "grid" | "strip";
+  /** Overrides the grid columns, e.g. "grid grid-cols-3 gap-3" for a row of three. */
+  gridClassName?: string;
+}) {
   const t = useTranslations("gallery");
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState<number | null>(null);
@@ -44,7 +53,7 @@ export function Gallery({ items, variant = "grid" }: { items: GalleryItem[]; var
   const gridClass =
     variant === "strip"
       ? "flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]"
-      : "grid grid-cols-2 gap-3 sm:grid-cols-3";
+      : (gridClassName ?? "grid grid-cols-2 gap-3 sm:grid-cols-3");
 
   return (
     <>
