@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens: deep pine green, warm wood/amber, cream paper, charcoal ink.
+ * Contrast: ink on cream 14:1, pine-800 on cream 10:1, cream on pine-800 10:1,
+ * white on wood-600 5.1:1 (primary buttons), wood-700 on cream 6.3:1.
+ */
+@theme {
+  --color-pine-50: #eef3ef;
+  --color-pine-100: #d7e3da;
+  --color-pine-300: #8fa98f;
+  --color-pine-500: #4f6e57;
+  --color-pine-600: #3a5a45;
+  --color-pine-700: #2a4a37;
+  --color-pine-800: #1f3b2d;
+  --color-pine-900: #13261c;
+
+  --color-wood-100: #f5e6cc;
+  --color-wood-300: #e2b26b;
+  --color-wood-400: #d49a4a;
+  --color-wood-500: #b7772f;
+  --color-wood-600: #9a5f1f;
+  --color-wood-700: #7d4b17;
+
+  --color-cream-50: #fdfaf4;
+  --color-cream-100: #f7f1e6;
+  --color-cream-200: #efe5d3;
+  --color-cream-300: #e3d5bb;
+
+  --color-ink: #22211f;
+  --color-ink-muted: #58534b;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(19 38 28 / 0.06), 0 8px 24px -12px rgb(19 38 28 / 0.25);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-cream-100);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-wood-400);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 76rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.875rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    text-align: center;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      border-color 0.15s,
+      transform 0.15s;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-primary {
+    background: var(--color-wood-600);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-wood-700);
+  }
+  .btn-pine {
+    background: var(--color-pine-800);
+    color: var(--color-cream-50);
+  }
+  .btn-pine:hover {
+    background: var(--color-pine-700);
+  }
+  .btn-outline {
+    border: 1.5px solid currentColor;
+  }
+  .btn-outline:hover {
+    background: rgb(255 255 255 / 0.12);
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .prose-ks p + p {
+    margin-top: 1rem;
+  }
+  .prose-ks h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
+  }
+  .prose-ks ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  .field-label {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .field-input {
+    display: block;
+    width: 100%;
+    min-height: 2.875rem;
+    padding: 0.625rem 0.875rem;
+    border: 1.5px solid var(--color-cream-300);
+    border-radius: 0.75rem;
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 1rem;
+  }
+  .field-input:focus {
+    border-color: var(--color-pine-600);
+    outline: 2px solid var(--color-pine-100);
+    outline-offset: 0;
+  }
+  .field-input[aria-invalid="true"] {
+    border-color: #b42318;
+  }
+  .field-error {
+    margin-top: 0.375rem;
+    font-size: 0.85rem;
+    color: #b42318;
+  }
+  .field-hint {
+    margin-top: 0.375rem;
+    font-size: 0.8rem;
+    color: var(--color-ink-muted);
+  }
+}
